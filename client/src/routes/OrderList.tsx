@@ -76,6 +76,9 @@ const OrderList = () => {
                   <Card.Subtitle className="mb-2 text-muted">
                     {order.address} - {order.phoneNumber}
                   </Card.Subtitle>
+                  <Card.Text>
+                    <strong>Created by:</strong> {order.userName || 'Unknown'}
+                  </Card.Text>
                   <ListGroup variant="flush">
                     {order.items.map((item, itemIndex) => (
                       <ListGroup.Item key={itemIndex}>

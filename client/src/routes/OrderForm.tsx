@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useApi } from '../services/api';
-
 import { useNavigate } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 
 export interface Items {
   _id?: string;
@@ -17,9 +17,12 @@ export interface OrderDetails {
   name: string;
   phoneNumber: string;
   items: Items[];
+  userId?: string;  
+  userName?: string;  
 }
 
 const OrderForm = () => {
+  const { user: userData } = useAuth0();
   const {createOrder } = useApi();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
@@ -27,7 +30,9 @@ const OrderForm = () => {
     address: '',
     name: '',
     phoneNumber: '',
-    items: [{ name: '', amount: 1 }]
+    items: [{ name: '', amount: 1 }],
+    userId: userData?.sub, 
+    userName: userData?.name
   });
 
   const [successMessage, setSuccessMessage] = useState<string | null>(null);

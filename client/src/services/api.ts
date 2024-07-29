@@ -9,7 +9,6 @@ export const useApi = () => {
 
   const getAllOrdersDetails = async (): Promise<any> => {
     const token = await getAccessTokenSilently();
-    console.log('Access Token:', token);
     const response = await axios.get(`${apiEndpoint}/order`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -20,13 +19,14 @@ export const useApi = () => {
 
   const createOrder = async (orderDetails: OrderDetails) => {
     const token = await getAccessTokenSilently();
+    console.log("Order Details Sent:", orderDetails);
     const response = await axios.post(`${apiEndpoint}/createOrder`, orderDetails, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log('Order created:', response.data);
+    return response.data;
   };
 
   const deleteOrder = async (orderId: string) => {

@@ -12,6 +12,8 @@ export interface OrderDetails {
   name: string;
   phoneNumber: string;
   items: Items[];
+  userId: string;  
+  userName: string;  
 }
 
 const itemSchema = new Schema<Items>({
@@ -23,7 +25,9 @@ const orderDetailsSchema = new Schema<OrderModel>({
   address: { type: String, required: true },
   name: { type: String, required: true },
   phoneNumber: { type: String, required: true },
-  items: { type: [itemSchema], required: true }
+  items: { type: [itemSchema], required: true },
+  userId: { type: String, required: true },  
+  userName: { type: String, required: true } 
 });
 
 export type OrderModel = OrderDetails & Document;

@@ -1,5 +1,4 @@
-import mongoose from "mongoose";
-import {OrderDetails} from "../model/ordersModal"
+import { OrderDetails } from "../model/ordersModal";
 
 const orderDetails: OrderDetails[] = [{
   address: "Berlin",
@@ -8,7 +7,9 @@ const orderDetails: OrderDetails[] = [{
   items: [
     { name: "Apple", amount: 1 }, 
     { name: "Banana", amount: 5 } 
-  ]
+  ],
+  userId: "google-oauth2|114358636173866786010",  
+  userName: "ABC"  
 }];
 
 export default orderDetails;

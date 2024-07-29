@@ -19,7 +19,7 @@ const getKey = (header: jwt.JwtHeader, callback: (err: Error | null, key?: jwt.S
 };
 
 export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
-  console.log('checkJwt middleware called');
+  // console.log('checkJwt middleware called');
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
@@ -29,11 +29,11 @@ export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
 
   const token = authHeader.split(' ')[1];
   if (!token) {
-    console.log('No token present in Authorization header');
+    // console.log('No token present in Authorization header');
     return res.status(401).json({ message: 'No token provided' });
   }
 
-  console.log('Token received:', token);
+  // console.log('Token received:', token);
 
   jwt.verify(token, getKey, {
     audience: process.env.AUTH0_AUDIENCE,
@@ -44,7 +44,7 @@ export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
       console.error('Token verification failed:', err);
       return res.status(401).json({ message: 'Invalid token', error: err.message });
     }
-    console.log('Token successfully verified:', decoded);
+    // console.log('Token successfully verified:', decoded);
     req.user = decoded as jwt.JwtPayload;
     next();
   });
