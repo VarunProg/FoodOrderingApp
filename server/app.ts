@@ -4,9 +4,12 @@ import connectDB from "./database/connection";
 import orderRoutes from "./router/router"
 import cors from "cors";
 import { initializeApp } from './initilizerApp';
+import { checkJwt } from './middleware/authMiddleware';
+import * as dotenv from 'dotenv';
 
 const app = express();
-const port = process.env.PORT;
+dotenv.config();
+const port = process.env.PORT || 3000;
 app.use(cors());
 
 initializeApp();
@@ -19,7 +22,7 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
-app.use('/', orderRoutes );
+app.use('/', checkJwt,  orderRoutes );
 
 
 app.listen(port, () => {

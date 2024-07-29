@@ -4,6 +4,7 @@ import { createOrder, deleteOrder, getOrderDetails } from "../controller/control
 
 const router = express.Router();
 
+
 router.get('/order', getOrderDetails);
 router.post('/createOrder', createOrder);
 router.delete('/orders/:orderId', deleteOrder);

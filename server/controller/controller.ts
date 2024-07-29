@@ -2,7 +2,6 @@ import express, { Request, Response } from "express";
 import Order from "../model/ordersModal";
 import mongoose from "mongoose";
 
-// Get all orders
 export const getOrderDetails = async (req: Request, res: Response) => {
     try {
         const orders = await Order.find();
@@ -12,7 +11,6 @@ export const getOrderDetails = async (req: Request, res: Response) => {
     }
 };
 
-// Create a new order
 export const createOrder = async (req: Request, res: Response) => {
     const { address, name, phoneNumber, items } = req.body;
 

@@ -2,30 +2,38 @@ import jwt from 'jsonwebtoken';
 import jwksClient from 'jwks-rsa';
 import { Request, Response, NextFunction } from 'express';
 
-// Create a JWKS client
 const client = jwksClient({
   jwksUri: `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`
 });
 
-// Function to get the signing key
-function getKey(header: jwt.JwtHeader, callback: (err: Error | null, key?: jwt.Secret) => void) {
+const getKey = (header: jwt.JwtHeader, callback: (err: Error | null, key?: jwt.Secret) => void) => {
   client.getSigningKey(header.kid, (err, key) => {
-    if (err) {
-      callback(err);
+    if (err || !key) {
+      console.error('Error getting signing key:', err);
+      callback(err || new Error('Key not found'));
     } else {
-      const signingKey = key.getPublicKey(); // Use getPublicKey() to retrieve the key
+      const signingKey = key.getPublicKey ? key.getPublicKey() : (key as any).rsaPublicKey;
       callback(null, signingKey);
     }
   });
-}
+};
 
-// Middleware to check JWT
-export function checkJwt(req: Request, res: Response, next: NextFunction) {
-  const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
+export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
+  console.log('checkJwt middleware called');
+  const authHeader = req.headers.authorization;
 
-  if (!token) {
+  if (!authHeader) {
+    console.log('No Authorization header present');
     return res.status(401).json({ message: 'No token provided' });
   }
+
+  const token = authHeader.split(' ')[1];
+  if (!token) {
+    console.log('No token present in Authorization header');
+    return res.status(401).json({ message: 'No token provided' });
+  }
+
+  console.log('Token received:', token);
 
   jwt.verify(token, getKey, {
     audience: process.env.AUTH0_AUDIENCE,
@@ -33,9 +41,11 @@ export function checkJwt(req: Request, res: Response, next: NextFunction) {
     algorithms: ['RS256']
   }, (err, decoded) => {
     if (err) {
-      return res.status(401).json({ message: 'Invalid token' });
+      console.error('Token verification failed:', err);
+      return res.status(401).json({ message: 'Invalid token', error: err.message });
     }
-    req.user = decoded;
+    console.log('Token successfully verified:', decoded);
+    req.user = decoded as jwt.JwtPayload;
     next();
   });
-}
+};

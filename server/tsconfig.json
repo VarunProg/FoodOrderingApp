@@ -1,0 +1,29 @@
+// {
+//   "compilerOptions": {
+//     "target": "es2016",
+//     "module": "commonjs",
+//     "esModuleInterop": true,
+//     "forceConsistentCasingInFileNames": true,
+//     "strict": true,
+//     "typeRoots": ["./node_modules/@types", "./types"],
+//     "skipLibCheck": true
+//   },
+//   "include": ["**/*.ts", "global.d.ts"],
+//   "exclude": ["node_modules"]
+// }
+
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "typeRoots": ["./node_modules/@types", "./types"],
+    "skipLibCheck": true,
+    "outDir": "./dist",         // Output directory for compiled JavaScript files
+    "rootDir": "."              // Root directory for TypeScript source files
+  },
+  "include": ["**/*.ts", "global.d.ts"],    // Include all .ts files in the project
+  "exclude": ["node_modules", "dist"]       // Exclude node_modules and output directory
+}
