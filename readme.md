@@ -27,22 +27,21 @@
 
 #### For MongoDB Setup:
 1. MongoDB Credentials:
-. in server folder go to .env file 
-. Inside the .env file, you will find an environment variable named MONGO_URI. This variable holds the credentials required to connect to the MongoDB database.
+-  in server folder go to .env file 
+- Inside the .env file, you will find an environment variable named MONGO_URI. This variable holds the credentials required to connect to the MongoDB database.
 
 2. Edit the .env File:
-. Update the MONGO_URI value with your MongoDB connection string.
-. Replace the existing connection string
+-  Update the MONGO_URI value with your MongoDB connection string.
+- Replace the existing connection string
  (mongodb+srv://varunchaudhary578:R914TnlGVrPgK0Qa@cluster1.lrkfn6k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1) with your own MongoDB connection string.
 
  MONGO_URI = YOUR_MONGODB_CONNECTION_STRING
 
 3. MongoDB Connection String:
-. The MongoDB connection string typically consists of:
-. mongodb+srv://: The connection protocol.
-. USERNAME:PASSWORD: Your MongoDB username and password.
-. @cluster-name.mongodb.net/: The MongoDB cluster name.
-. DATABASE_NAME: The name of your MongoDB database.
+-  The MongoDB connection string typically consists of: mongodb+srv://: The connection protocol.
+- USERNAME:PASSWORD: Your MongoDB username and password.
+-  @cluster-name.mongodb.net/: The MongoDB cluster name.
+- DATABASE_NAME: The name of your MongoDB database.
 
 ## Authentication with Auth0
 
@@ -55,12 +54,15 @@ To enhance security and user-specific features, this application utilizes Auth0 
    ## Features of the Application
    - Auth0 has been used to authorised the user
    - only authorised user can hit the api from frontend
-   - backend also checks if the user is authorised then only backend api can be triggered
+   - backend also checks if the user is authorised then only backend api can be triggered (JWT Authentication is implemented)
    - on frontend routes are protected so that only authorised user gets access to application
    - routing has been implemented on the frontend to create-order and for landing page.
    - you can see on UI who created the order
    - sign in functionality with using Auth0
    - sign out
+   - user can create the order (when order created alerts will be pop up on the screen)
+   - user can delete the order (when user tries to delete the order user will be asked for confirmation)
+   - On UI user can see who created the order with user's name
 
 **ScreenShots**
    <img src="screenshots/create-order.png" alt="Project Logo" width="200"/>
