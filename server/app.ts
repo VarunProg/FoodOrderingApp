@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 // Apply the checkJwt middleware to all routes in orderRoutes
-app.use('/', checkJwt, orderRoutes);
+app.use('/api', checkJwt, orderRoutes);
 
 app.listen(port, () => {
   console.log(`app listening on port ${port}`);

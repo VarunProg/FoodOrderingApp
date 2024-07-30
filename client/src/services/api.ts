@@ -2,14 +2,14 @@ import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
 import { OrderDetails } from '../routes/OrderForm';
 
-const apiEndpoint = 'http://localhost:3000';
+const apiEndpoint = 'http://localhost:3000/api';
 
 export const useApi = () => {
   const { getAccessTokenSilently } = useAuth0();
 
   const getAllOrdersDetails = async (): Promise<any> => {
     const token = await getAccessTokenSilently();
-    const response = await axios.get(`${apiEndpoint}/order`, {
+    const response = await axios.get(`${apiEndpoint}/orders`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -20,7 +20,7 @@ export const useApi = () => {
   const createOrder = async (orderDetails: OrderDetails) => {
     const token = await getAccessTokenSilently();
     console.log("Order Details Sent:", orderDetails);
-    const response = await axios.post(`${apiEndpoint}/createOrder`, orderDetails, {
+    const response = await axios.post(`${apiEndpoint}/orders`, orderDetails, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
