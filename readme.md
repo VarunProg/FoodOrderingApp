@@ -65,5 +65,5 @@ To enhance security and user-specific features, this application utilizes Auth0 
    - On UI user can see who created the order with user's name
 
 **ScreenShots**
-   <img src="screenshots/create-order.png" alt="Project Logo" width="200"/>
-   <img src="screenshots/createdOrder.png" alt="Project Logo" width="200"/>
+   <img src="./client/screenshots/create-order.png" alt="Project Logo" width="200"/>
+   <img src="./client/screenshots/createdOrder.png" alt="Project Logo" width="200"/>
