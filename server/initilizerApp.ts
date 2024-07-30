@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-import Order from './model/ordersModal';  
-import orderDetails from './data/orderDetails';  
+import Order from './model/ordersModal';
+import orderDetails from './data/orderDetails';
 
 const hasOrderData = async () => {
   try {
@@ -18,7 +18,7 @@ const saveOrder = async () => {
       const orderInstance = new Order(order);
       await orderInstance.save();
     }
-    console.log('Order data saved successfully!'); 
+    console.log('Order data saved successfully!');
   } catch (error) {
     console.error('Error saving order data:', error);
   }
@@ -44,7 +44,5 @@ export const initializeApp = async () => {
   } catch (error) {
     console.error('Error connecting to MongoDB or initializing data:', error);
     process.exit(1);
-  } finally {
-    await mongoose.disconnect();
   }
 };

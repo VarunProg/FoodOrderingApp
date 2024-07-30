@@ -24,6 +24,7 @@
 1. In new terminal go to sevrer folder 
 2. run -> npm i - this will install dev dependencies in local inside node_modules folder
 3. run -> npm start - this will launch server on port 3000 (keep it running for server api calls)
+4. run -> npm run build - to build the app
 
 #### For MongoDB Setup:
 1. MongoDB Credentials:

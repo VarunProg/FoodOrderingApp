@@ -1,7 +1,6 @@
 import express, { Request, Response } from "express";
 import Order from "../model/ordersModal";
 import mongoose from "mongoose";
-import jwt, { JwtPayload } from 'jsonwebtoken';
 
 export const getOrderDetails = async (req: Request, res: Response) => {
     try {
@@ -13,12 +12,8 @@ export const getOrderDetails = async (req: Request, res: Response) => {
   };
 
   export const createOrder = async (req: Request, res: Response) => {
-    const { address, name, phoneNumber, items } = req.body;
-    const user = req.user as jwt.JwtPayload;
-  
-    console.log("Request Body:", req.body); // Log request body
-    console.log("User from Request:", user); // Log user from JWT
-  
+    const { address, name, phoneNumber, items, userId , userName} = req.body;
+   
     if (!address || !name || !phoneNumber || !items) {
       return res.status(400).json({ message: "All fields are required" });
     }
@@ -32,8 +27,8 @@ export const getOrderDetails = async (req: Request, res: Response) => {
           ...item,
           _id: new mongoose.Types.ObjectId()
         })),
-        userId: user.sub,
-        userName: user.name
+        userId: userId,
+        userName: userName
       });
   
       await newOrder.save();
